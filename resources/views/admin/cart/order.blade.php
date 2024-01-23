@@ -24,19 +24,22 @@
                                     </div>
                                     <div class="col-9 input-group mb-3 ">
                                         <select class="form-select" name="status" id="inputGroupSelect02">
-                                            <option value="">All</option>
-                                            <option value="0">Pending</option>
-                                            <option value="1">Accept</option>
-                                            <option value="2">Reject</option>
+                                            <option value="">All
+                                            </option>
+                                            <option value="0" @if (request('status') == '0') selected @endif>Pending
+                                            </option>
+                                            <option value="1" @if (request('status') == '1') selected @endif>Accept
+                                            </option>
+                                            <option value="2" @if (request('status') == '2') selected @endif>Reject
+                                            </option>
                                         </select>
-                                        <button type="submit" class="input-group-text btn btn-dark"
-                                            for="inputGroupSelect02">Search</button>
+                                        <button type="submit" class="input-group-text btn btn-dark">Search</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-6">
-                            <form action="{{ route('product#list') }}" method="GET">
+                            <form action="{{ route('product#list') }}" method="post">
                                 @csrf
                                 <div class=" d-flex justify-content-between align-items-center row">
                                     <div class="col-3">Search Key : <small class="text-danger">{{ request('key') }}</small>
@@ -68,7 +71,9 @@
                                         <input type="hidden" class="orderID" value="{{ $o->id }}">
                                         <td>{{ $o->user_id }}</td>
                                         <td>{{ $o->user_name }}</td>
-                                        <td>{{ $o->order_code }}</td>
+                                        <td><a
+                                                href="{{ route('product#orderList', $o->order_code) }}">{{ $o->order_code }}</a>
+                                        </td>
                                         <td>{{ $o->created_at->format('F-j-Y') }}</td>
                                         <td class="total">{{ $o->total_price }} MMK</td>
                                         <td>

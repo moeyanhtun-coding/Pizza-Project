@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\OrderListController;
+use App\Models\orderList;
 
 class OrderController extends Controller
 {
@@ -41,5 +44,18 @@ class OrderController extends Controller
     // status change
     public function statusChange(Request $request){
         Order::where('id',$request->orderID)->update(['status'=> $request->status]);
+    }
+
+    // orderproduct list
+    public function productList($orderCode)
+    {
+        $totalPrice = Order::where('order_code',$orderCode)->first();
+        $order = orderList::select('order_lists.*', 'users.name as user_name',
+                'products.name as productName','products.image as productImage')
+            ->leftJoin('users', 'users.id', '=', 'order_lists.user_id')
+            ->leftJoin('products','products.id','=','order_lists.product_id')
+            ->where('order_lists.order_code',$orderCode)
+            ->get();
+            return view('admin.cart.orderList',compact('order','totalPrice'));
     }
 }

@@ -67,7 +67,7 @@
                         </li>
                         <li>
                             <a href="{{ route('order#list') }}">
-                                <i class="fa-solid fa-pizza-slice"></i> Order List
+                                <i class="fa-solid fa-table-list"></i> Order List
                             </a>
                         </li>
                     </ul>

@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('list/status',[OrderController::class,'orderStatus'])->name('order#status');
             Route::get('status/change', [OrderController::class,'statusChange'])->name('status#change');
             Route::post('status/search', [OrderController::class,'statusSearch'])->name('status#search');
+            Route::get('product/list/{order_code}',[OrderController::class,'productList'])->name('product#orderList');
         });
     });
 
