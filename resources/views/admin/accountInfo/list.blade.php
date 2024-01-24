@@ -127,7 +127,7 @@
                 $role = $parentNote.find('.role').val();
                 $.ajax({
                     type: "get",
-                    url: "http://127.0.0.1:8000/admin/role/change",
+                    url: "/admin/role/change",
                     data: {
                         'id': $adminId,
                         'role': $role,

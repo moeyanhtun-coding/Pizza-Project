@@ -105,7 +105,7 @@
                 $data = $('#status').val();
                 $.ajax({
                     type: "get",
-                    url: "http://127.0.0.1:8000/order/list/status",
+                    url: "/order/list/status",
                     data: {
                         'status': $data
                     },
@@ -175,7 +175,7 @@
                 }
                 $.ajax({
                     type: "get",
-                    url: "http://127.0.0.1:8000/order/status/change",
+                    url: "/order/status/change",
                     data: $data,
                     dataType: "json",
                 });
