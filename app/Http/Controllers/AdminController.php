@@ -35,8 +35,7 @@ class AdminController extends Controller
         }
     }
     // Account Detail
-    public function detail($id)
-    {
+    public function accountDetail($id){
         $data = User::where('id', $id)->first();
         return view('admin.accountInfo.detail', compact('data'));
     }

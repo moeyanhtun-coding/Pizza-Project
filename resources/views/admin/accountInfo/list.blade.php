@@ -76,6 +76,7 @@
                                                         srcset="">
                                                 @endif
                                             </td>
+                                            <input class="adminId" type="hidden" value="{{ $items->id }}">
                                             <td>{{ $items->name }}</td>
                                             <td>{{ $items->email }}</td>
                                             <td>{{ $items->gender }}</td>
@@ -86,18 +87,15 @@
                                                 <div class="table-data-feature">
                                                     @if ($items->id == Auth::User()->id)
                                                     @else
-                                                        <a href="{{ route('admin#changeRole', $items->id) }}">
-                                                            <button class="item me-2" data-toggle="tooltip"
-                                                                data-placement="top" title="Delete">
-                                                                <i class="fa-solid fa-user-minus"></i>
-                                                            </button>
-                                                        </a>
-                                                        <a href="{{ route('list#delete', $items->id) }}">
-                                                            <button class="item" data-toggle="tooltip"
-                                                                data-placement="top" title="Delete">
-                                                                <i class="zmdi zmdi-delete"></i>
-                                                            </button>
-                                                        </a>
+                                                        <select name="roleChange" class="role form-control text-dark"
+                                                            id="">
+                                                            <option value="user"
+                                                                @if ($items->role == 'user') selected @endif>User
+                                                            </option>
+                                                            <option value="admin"
+                                                                @if ($items->role == 'admin') selected @endif>
+                                                                Admin</option>
+                                                        </select>
                                                     @endif
                                                 </div>
                                             </td>
@@ -119,4 +117,24 @@
         </div>
     </div>
     <!-- END MAIN CONTENT-->
+@endsection
+@section('scriptSource')
+    <script>
+        $(document).ready(function() {
+            $('.role').change(function() {
+                $parentNote = $(this).parents('tbody tr');
+                $adminId = $parentNote.find('.adminId').val();
+                $role = $parentNote.find('.role').val();
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:8000/admin/role/change",
+                    data: {
+                        'id': $adminId,
+                        'role': $role,
+                    },
+                    dataType: "json",
+                });
+            })
+        })
+    </script>
 @endsection

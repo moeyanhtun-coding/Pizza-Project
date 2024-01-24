@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\orderList;
@@ -71,7 +72,11 @@ class AjaxController extends Controller
             ->where('id', $request->orderID)
             ->delete();
     }
-
+// role change
+    public function roleChange(Request $request)
+    {
+        User::where('id', $request->id)->update([ 'role'=>$request->role]);
+    }
     private function getData($request)
     {
         return [

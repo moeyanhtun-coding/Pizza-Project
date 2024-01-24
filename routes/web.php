@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('password/change', [AdminController::class, 'changePassword'])->name('change#password');
 
             // account CRUD
-            Route::get('profile/detail/{id}', [AdminController::class, 'detail'])->name('account#detail');
+            Route::get('profile/detail/{id}',[AdminController::class,'accountDetail'])->name('adminAccount#detail');
             Route::get('profile/edit/{id}', [AdminController::class, 'edit'])->name('account#edit');
             Route::post('account/detail/update/{id}', [AdminController::class, 'updateDetails'])->name('update#detail');
 
@@ -53,6 +53,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}', [AdminController::class, ('delete')])->name('list#delete');
             Route::get('change/role/{id}', [AdminController::class, 'changeRole'])->name('admin#changeRole');
             Route::post('change/role/{id}', [AdminController::class, 'change'])->name('change#role');
+            Route::get('role/change', [AjaxController::class,'roleChange'])->name('ajax#changeRole');
+
         });
         Route::prefix('product')->group(function () {
             Route::get('list', [ProductController::class, 'listPage'])->name('product#list');
@@ -99,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('order', [AjaxController::class, 'orderConfirm'])->name('order#confirm');
             Route::get('order/cancel',[AjaxController::class,'orderCancel'])->name('order#Cancel');
             Route::get('row/delete', [AjaxController::class, 'rowDelete'])->name('row#delete');
+
         });
     });
 });

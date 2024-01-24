@@ -156,15 +156,17 @@
                                                     </a>
                                                 </div>
                                                 <div class="content">
+
                                                     <h5 class="name">
                                                         <a href="#">{{ Auth::user()->name }}</a>
                                                     </h5>
                                                     <span class="email">{{ Auth::user()->email }}</span>
+
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="{{ route('account#detail', Auth::user()->id) }}">
+                                                    <a href="{{ route('adminAccount#detail', Auth::user()->id) }}">
                                                         <i class="fa-solid fa-user"></i>Account</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
