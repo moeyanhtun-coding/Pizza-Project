@@ -42,7 +42,7 @@ class AdminController extends Controller
     // account list
     public function list()
     {
-        $data = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(5);;
+        $data = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(4);;
         return view('admin.accountInfo.list', compact('data'));
     }
     // edit account
@@ -91,6 +91,13 @@ class AdminController extends Controller
         User::where('id', $id)->update($data);
         return redirect()->route('account#list');
     }
+
+    // user list
+    public function usersList(){
+        $data = User::where('role', 'user')->paginate(4);
+    return view('admin.accountInfo.userList', compact('data'));
+    }
+
     // account update get data
     private function accountGetData($request)
     {

@@ -9,19 +9,9 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Admin List</h2>
+                                <h2 class="title-1">User List</h2>
                             </div>
                         </div>
-                    </div>
-                    <div class="">
-                        @if (session('DeleteSuccess'))
-                            <div id="myAlert" class="alert alert-warning alert-dismissible fade show float-right col-3 "
-                                role="alert">
-                                <small>{{ session('DeleteSuccess') }}</small>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
                     </div>
                     @if (count($data) != 0)
                         <div class="table-responsive table-responsive-data2">
@@ -34,8 +24,7 @@
                                         <th>Gender</th>
                                         <th>Phone</th>
                                         <th>Address</th>
-                                        <th>Role
-                                        </th>
+                                        <th>Role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +74,7 @@
                             {{ $data->links() }}
                         </div>
                     @else
-                        <h3 class=" text-secondary text-center mt-4">There is no category !!!</h3>
+                        <h3 class=" text-secondary text-center mt-4">There is no User !!!</h3>
                     @endif
                     <!-- END DATA TABLE -->
                 </div>
@@ -110,7 +99,7 @@
                     },
                     dataType: "json",
                 });
-                loaction.reload();
+                location.reload();
             })
         })
     </script>

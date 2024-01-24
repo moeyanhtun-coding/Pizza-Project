@@ -55,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('change/role/{id}', [AdminController::class, 'change'])->name('change#role');
             Route::get('role/change', [AjaxController::class,'roleChange'])->name('ajax#changeRole');
 
+            // user list
+
+            Route::get('users/list',[AdminController::class,'usersList'])->name('users#list');
+
         });
         Route::prefix('product')->group(function () {
             Route::get('list', [ProductController::class, 'listPage'])->name('product#list');

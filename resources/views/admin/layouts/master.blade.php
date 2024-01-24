@@ -70,6 +70,11 @@
                                 <i class="fa-solid fa-table-list"></i> Order List
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('users#list') }}">
+                                <i class="fa-solid fa-users"></i> User List
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
