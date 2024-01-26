@@ -48,9 +48,6 @@
 
                     </form>
                 </div>
-                <div class="">
-                    <button class="btn btn btn-warning w-100">Order</button>
-                </div>
                 <!-- Size End -->
             </div>
             <!-- Shop Sidebar End -->
@@ -95,19 +92,11 @@
                         <span class=" row" id="dataList">
                             @foreach ($product as $item)
                                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                                    <a href="{{ route('item#detail', $item->id) }}">
+                                    <a id="viewCount" href="{{ route('item#detail', $item->id) }}">
                                         <div class="product-item bg-light mb-4" id="myForm">
                                             <div class="product-img position-relative overflow-hidden">
                                                 <img class="img-fluid w-100" style="height: 220px"
                                                     src="{{ asset('storage/' . $item->image) }}" alt="">
-                                                {{-- <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square"><i
-                                                        class="fa fa-shopping-cart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square"
-                                                    href="{{ route('item#detail', $item->id) }}"><i
-                                                        class="fa-solid fa-exclamation"></i></a>
-
-                                            </div> --}}
                                             </div>
                                             <div class="text-center py-4">
                                                 <h4>{{ $item->name }}</h4>
@@ -136,6 +125,8 @@
     </div>
     <!-- Shop End -->
 @endsection
+
+
 
 @section('ScriptSource')
     <script>
@@ -216,6 +207,19 @@
                     });
                 }
             })
+            // view count
+            $('#viewCount').click(() => {
+                console.log('hit');
+            })
+            $.ajax({
+                type: "get",
+                url: "",
+                data: "",
+                dataType: "json",
+                success: function(response) {
+
+                }
+            });
         });
     </script>
 @endsection

@@ -59,23 +59,35 @@ class AjaxController extends Controller
             'status' => 'true'
         ], 200);
     }
-    public function orderCancel(){
-        Cart::where('user_id',Auth::user()->id)->delete();
+    public function orderCancel()
+    {
+        Cart::where('user_id', Auth::user()->id)->delete();
         return response()->json([
-                'status' => 'true'
-            ], 200);
+            'status' => 'true'
+        ], 200);
     }
 
-    public function rowDelete(Request $request){
-        Cart::where('user_id',Auth::user()->id)
+    public function rowDelete(Request $request)
+    {
+        Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $request->productID)
             ->where('id', $request->orderID)
             ->delete();
     }
-// role change
+
+    // view count
+    public function viewCount(Request $request)
+    {
+        $product = Product::where('id', $request->pizzaID)->first();
+        $viewCount = [
+            'view_count' => $product->view_count + 1
+        ];
+        Product::where('id', $request->pizzaID)->update($viewCount);
+    }
+    // role change
     public function roleChange(Request $request)
     {
-        User::where('id', $request->id)->update([ 'role'=>$request->role]);
+        User::where('id', $request->id)->update(['role' => $request->role]);
     }
     private function getData($request)
     {

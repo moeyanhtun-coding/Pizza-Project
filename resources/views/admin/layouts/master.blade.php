@@ -75,6 +75,11 @@
                                 <i class="fa-solid fa-users"></i> User List
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('contact#list') }}">
+                                <i class="fa-solid fa-users"></i> Contact List
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

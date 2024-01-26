@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\pizzaContorller;
@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('password/change', [AdminController::class, 'changePassword'])->name('change#password');
 
             // account CRUD
-            Route::get('profile/detail/{id}',[AdminController::class,'accountDetail'])->name('adminAccount#detail');
+            Route::get('profile/detail/{id}', [AdminController::class, 'accountDetail'])->name('adminAccount#detail');
             Route::get('profile/edit/{id}', [AdminController::class, 'edit'])->name('account#edit');
             Route::post('account/detail/update/{id}', [AdminController::class, 'updateDetails'])->name('update#detail');
 
@@ -53,12 +53,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}', [AdminController::class, ('delete')])->name('list#delete');
             Route::get('change/role/{id}', [AdminController::class, 'changeRole'])->name('admin#changeRole');
             Route::post('change/role/{id}', [AdminController::class, 'change'])->name('change#role');
-            Route::get('role/change', [AjaxController::class,'roleChange'])->name('ajax#changeRole');
+            Route::get('role/change', [AjaxController::class, 'roleChange'])->name('ajax#changeRole');
 
             // user list
+            Route::get('users/list', [AdminController::class, 'usersList'])->name('users#list');
 
-            Route::get('users/list',[AdminController::class,'usersList'])->name('users#list');
-
+            // contact list
+            Route::get('contact/list', [AdminController::class, 'contactList'])->name('contact#list');
+            Route::get('contact/list/detail/{id}', [AdminController::class, 'contactDetail'])->name('contact#detail');
         });
         Route::prefix('product')->group(function () {
             Route::get('list', [ProductController::class, 'listPage'])->name('product#list');
@@ -70,11 +72,11 @@ Route::middleware(['auth'])->group(function () {
             Route::post('update/{id}', [ProductController::class, 'update'])->name('update#page');
         });
         Route::prefix('order')->group(function () {
-            Route::get('list', [OrderController::class,'orderList'])->name('order#list');
-            Route::get('list/status',[OrderController::class,'orderStatus'])->name('order#status');
-            Route::get('status/change', [OrderController::class,'statusChange'])->name('status#change');
-            Route::post('status/search', [OrderController::class,'statusSearch'])->name('status#search');
-            Route::get('product/list/{order_code}',[OrderController::class,'productList'])->name('product#orderList');
+            Route::get('list', [OrderController::class, 'orderList'])->name('order#list');
+            Route::get('list/status', [OrderController::class, 'orderStatus'])->name('order#status');
+            Route::get('status/change', [OrderController::class, 'statusChange'])->name('status#change');
+            Route::post('status/search', [OrderController::class, 'statusSearch'])->name('status#search');
+            Route::get('product/list/{order_code}', [OrderController::class, 'productList'])->name('product#orderList');
         });
     });
 
@@ -84,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('home', [UserController::class, 'home'])->name('user#home');
         Route::get('category/filter/{id}', [UserController::class, 'filter'])->name('pizza#filter');
         Route::get('history/order', [UserController::class, 'history'])->name('history#order');
+        Route::get('contact/us', [UserController::class, 'contactUs'])->name('contact#us');
+        Route::post('contact/us/send', [UserController::class, 'contactSend'])->name('contactUs#send');
 
         //account function
 
@@ -103,9 +107,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('pizza/list', [AjaxController::class, 'pizzaList'])->name('pizza#list');
             Route::get('addToCart', [AjaxController::class, 'addToCart'])->name('pizza#addtocart');
             Route::get('order', [AjaxController::class, 'orderConfirm'])->name('order#confirm');
-            Route::get('order/cancel',[AjaxController::class,'orderCancel'])->name('order#Cancel');
+            Route::get('order/cancel', [AjaxController::class, 'orderCancel'])->name('order#Cancel');
             Route::get('row/delete', [AjaxController::class, 'rowDelete'])->name('row#delete');
-
+            Route::get('viewCount/increase', [AjaxController::class, 'viewCount'])->name('view#count');
         });
     });
 });

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -104,6 +105,37 @@ class UserController extends Controller
         User::where('id', $id)->update($data);
         return redirect()->route('user#home');
     }
+
+    // contact us
+    public function contactUs()
+    {
+        return view('user.contact.contact_us');
+    }
+
+    public function contactSend(Request $request)
+    {
+        $this->contactSendValidation($request);
+        $data = $this->contactSendgetData($request);
+        Contact::create($data);
+        return redirect()->route('user#home');
+    }
+    private function contactSendgetData($request)
+    {
+        return [
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+            'user_id' => $request->userId,
+        ];
+    }
+    private function contactSendValidation($request)
+    {
+        Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required | min:10',
+        ])->validate();
+    }
     // password get data
     private function validationPassword($request)
     {
@@ -124,6 +156,7 @@ class UserController extends Controller
             'image' => 'mimes:jpg,bmp,png,jpeg'
         ])->validate();
     }
+
     private function updateGetData($request)
     {
         return [

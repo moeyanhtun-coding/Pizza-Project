@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,8 @@ class AdminController extends Controller
         }
     }
     // Account Detail
-    public function accountDetail($id){
+    public function accountDetail($id)
+    {
         $data = User::where('id', $id)->first();
         return view('admin.accountInfo.detail', compact('data'));
     }
@@ -92,12 +94,25 @@ class AdminController extends Controller
         return redirect()->route('account#list');
     }
 
-    // user list
-    public function usersList(){
-        $data = User::where('role', 'user')->paginate(4);
-    return view('admin.accountInfo.userList', compact('data'));
-    }
+    // contact list
+    public function contactList()
+    {
+        $data = Contact::select('contacts.*', 'users.name as user_name')
+            ->leftJoin('users', 'users.id', '=', 'contacts.user_id')->paginate(4);
 
+        return view('admin.accountInfo.contactList', compact('data'));
+    }
+    // user list
+    public function usersList()
+    {
+        $data = User::where('role', 'user')->paginate(4);
+        return view('admin.accountInfo.userList', compact('data'));
+    }
+    public function contactDetail($id)
+    {
+        $data = Contact::where('id', $id)->first();
+        return view('admin.accountInfo.contactDetail', compact('data'));
+    }
     // account update get data
     private function accountGetData($request)
     {

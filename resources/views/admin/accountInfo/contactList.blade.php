@@ -9,19 +9,9 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Admin List</h2>
+                                <h2 class="title-1">User List</h2>
                             </div>
                         </div>
-                    </div>
-                    <div class="">
-                        @if (session('DeleteSuccess'))
-                            <div id="myAlert" class="alert alert-warning alert-dismissible fade show float-right col-3 "
-                                role="alert">
-                                <small>{{ session('DeleteSuccess') }}</small>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endif
                     </div>
                     @if (count($data) != 0)
                         <div class="table-responsive table-responsive-data2">
@@ -31,11 +21,7 @@
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
-                                        <th>Role
-                                        </th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,26 +41,7 @@
                                             <input class="adminId" type="hidden" value="{{ $items->id }}">
                                             <td>{{ $items->name }}</td>
                                             <td>{{ $items->email }}</td>
-                                            <td>{{ $items->gender }}</td>
-                                            <td>{{ $items->phone }}</td>
-                                            <td>{{ $items->address }}</td>
-
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    @if ($items->id == Auth::User()->id)
-                                                    @else
-                                                        <select name="roleChange" class="role form-control text-dark"
-                                                            id="">
-                                                            <option value="user"
-                                                                @if ($items->role == 'user') selected @endif>User
-                                                            </option>
-                                                            <option value="admin"
-                                                                @if ($items->role == 'admin') selected @endif>
-                                                                Admin</option>
-                                                        </select>
-                                                    @endif
-                                                </div>
-                                            </td>
+                                            <td><a href="{{ route('contact#detail', $items->id) }}">View</a></td>
                                         </tr>
                                     @endforeach
 
@@ -85,7 +52,7 @@
                             {{ $data->links() }}
                         </div>
                     @else
-                        <h3 class=" text-secondary text-center mt-4">There is no category !!!</h3>
+                        <h3 class=" text-secondary text-center mt-4">There is no User !!!</h3>
                     @endif
                     <!-- END DATA TABLE -->
                 </div>

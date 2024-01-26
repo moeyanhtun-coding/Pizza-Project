@@ -60,7 +60,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ route('user#home') }}" class="nav-item nav-link active">Home</a>
                             <a href="{{ route('item#cart') }}" class="nav-item nav-link">My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{ route('contact#us') }}" class="nav-item nav-link">Contact us</a>
+                            @yield('contact_us')
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block me-5">
                             <div class="dropdown">

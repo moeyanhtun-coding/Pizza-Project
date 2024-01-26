@@ -44,14 +44,9 @@
                     <input type="text" id="userId" value="{{ Auth::user()->id }}" hidden>
 
                     <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
+                        <div class="text-success mr-2">
+                            <span>View {{ $data->view_count + 1 }}</span>
                         </div>
-                        <small class="pt-1">(99 Reviews)</small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">{{ $data->price }} MMK</h3>
                     <p class="mb-4">{{ $data->description }}</p>
@@ -113,12 +108,6 @@
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" style="height: 220px" src="{{ asset('storage/' . $d->image) }}"
                                     alt="">
-                                {{-- <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" id="cartButton"><i
-                                            class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="{{ route('item#detail', $d->id) }}"><i
-                                            class="fa-solid fa-exclamation"></i></a>
-                                </div> --}}
                             </div>
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="">{{ $d->name }}</a>
@@ -147,6 +136,17 @@
 @section('ScriptSource')
     <script>
         $(document).ready(function() {
+            // view count
+
+            $.ajax({
+                type: "get",
+                url: "/user/ajax/viewCount/increase",
+                data: {
+                    'pizzaID': $('#pizzaId').val(),
+                },
+                dataType: "json",
+            });
+
             $('#cartButton').click(function() {
                 $data = {
                     'userID': $('#userId').val(),
@@ -155,12 +155,12 @@
                 }
                 $.ajax({
                     type: "get",
-                    url: "http://127.0.0.1:8000/user/ajax/addToCart",
+                    url: "/user/ajax/addToCart",
                     data: $data,
                     dataType: "json",
                     success: function(response) {
                         if (response.status == 'success') {
-                            window.location.href = 'http://127.0.0.1:8000/user/home';
+                            window.location.href = '/user/home';
                         }
                     }
                 });
