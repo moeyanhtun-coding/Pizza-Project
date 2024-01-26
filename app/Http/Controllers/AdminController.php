@@ -72,7 +72,7 @@ class AdminController extends Controller
             $data['image'] = $fileName;
         }
         User::where('id', $id)->update($data);
-        return redirect()->route('account#detail');
+        return redirect()->route('adminAccount#detail', $id);
     }
     // delete admin account
     public function delete($id)
@@ -108,6 +108,46 @@ class AdminController extends Controller
         $data = User::where('role', 'user')->paginate(4);
         return view('admin.accountInfo.userList', compact('data'));
     }
+    // user list view
+    public function usersListView($id)
+    {
+        $data = User::where('id', $id)->first();
+        return view('admin.accountInfo.userListDetail', compact('data'));
+    }
+
+    //uesr list edit
+    public function userListEdit($id)
+    {
+        $accountInfo = User::where('id', $id)->first();
+        return view('admin.accountInfo.userListEdit', compact('accountInfo'));
+    }
+    // user list update
+    public function userListUpdate($id, Request $request)
+    {
+        $this->accountValidationCheck($request);
+        $data = $this->accountGetData($request);
+        if ($request->hasFile('image')) {
+            //1 old image name | check = delete | store
+            $dbImage = User::where('id', $id)->first();
+            $dbImage = $dbImage->image;
+            if ($dbImage != null) {
+                Storage::delete('public/' . $dbImage);
+            }
+            $fileName = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public', $fileName);
+            $data['image'] = $fileName;
+        }
+        User::where('id', $id)->update($data);
+        return redirect()->route('userList#view', $id);
+    }
+
+    // userlist delete
+    public function userListDelete($id)
+    {
+        User::where('id', $id)->delete();
+        return back()->with(['delete', 'Account Delete Success']);
+    }
+    //contact detail
     public function contactDetail($id)
     {
         $data = Contact::where('id', $id)->first();

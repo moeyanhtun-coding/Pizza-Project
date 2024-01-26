@@ -45,18 +45,22 @@ Route::middleware(['auth'])->group(function () {
 
             // account CRUD
             Route::get('profile/detail/{id}', [AdminController::class, 'accountDetail'])->name('adminAccount#detail');
-            Route::get('profile/edit/{id}', [AdminController::class, 'edit'])->name('account#edit');
+            Route::get('profile/edit/{id}', [AdminController::class, 'edit'])->name('account#editAdmin');
             Route::post('account/detail/update/{id}', [AdminController::class, 'updateDetails'])->name('update#detail');
 
             // admin list
             Route::get('list', [AdminController::class, 'list'])->name('account#list');
-            Route::get('delete/{id}', [AdminController::class, ('delete')])->name('list#delete');
+            Route::get('delete/{id}', [AdminController::class, 'delete'])->name('list#delete');
             Route::get('change/role/{id}', [AdminController::class, 'changeRole'])->name('admin#changeRole');
             Route::post('change/role/{id}', [AdminController::class, 'change'])->name('change#role');
             Route::get('role/change', [AjaxController::class, 'roleChange'])->name('ajax#changeRole');
 
             // user list
             Route::get('users/list', [AdminController::class, 'usersList'])->name('users#list');
+            Route::get('users/list/view/{id}', [AdminController::class, 'usersListView'])->name('userList#view');
+            Route::get('users/list/edit/{id}', [AdminController::class, 'userListEdit'])->name('userList#edit');
+            Route::post('users/list/update/{id}', [AdminController::class, 'userListUpdate'])->name('userList#update');
+            Route::get('users/list/delete/{id}', [AdminController::class, 'userListDelete'])->name('userList#delete');
 
             // contact list
             Route::get('contact/list', [AdminController::class, 'contactList'])->name('contact#list');

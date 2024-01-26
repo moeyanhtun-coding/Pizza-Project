@@ -18,6 +18,7 @@
                             <table class="table table-data2 text-center">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -27,6 +28,7 @@
                                 <tbody>
                                     @foreach ($data as $items)
                                         <tr class="shadow-sm">
+                                            <td>{{ $items->id }}</td>
                                             <td>
                                                 @if ($items->image == null)
                                                     <img width="100px" class=" image img-thumbnail"

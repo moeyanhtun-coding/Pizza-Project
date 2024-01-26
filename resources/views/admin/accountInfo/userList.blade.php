@@ -18,18 +18,20 @@
                             <table class="table table-data2 text-center">
                                 <thead>
                                     <tr>
+                                        <th></th>
+                                        <th>Id</th>
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
                                         <th>Role</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $items)
                                         <tr class="shadow-sm">
+                                            <td></td>
+                                            <td>{{ $items->id }}</td>
                                             <td>
                                                 @if ($items->image == null)
                                                     <img width="100px" class=" image img-thumbnail"
@@ -44,10 +46,6 @@
                                             <input class="adminId" type="hidden" value="{{ $items->id }}">
                                             <td>{{ $items->name }}</td>
                                             <td>{{ $items->email }}</td>
-                                            <td>{{ $items->gender }}</td>
-                                            <td>{{ $items->phone }}</td>
-                                            <td>{{ $items->address }}</td>
-
                                             <td>
                                                 <div class="table-data-feature">
                                                     @if ($items->id == Auth::User()->id)
@@ -62,6 +60,27 @@
                                                                 Admin</option>
                                                         </select>
                                                     @endif
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-data-feature">
+                                                    <a href="{{ route('userList#view', $items->id) }}"><button
+                                                            class="item me-1" data-toggle="tooltip" data-placement="top"
+                                                            title="View">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </button></a>
+                                                    <a href="{{ route('userList#edit', $items->id) }}">
+                                                        <button class="item me-1" data-toggle="tooltip" data-placement="top"
+                                                            title="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="{{ route('userList#delete', $items->id) }}">
+                                                        <button class="item me-1" data-toggle="tooltip" data-placement="top"
+                                                            title="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

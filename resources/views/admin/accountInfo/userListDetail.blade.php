@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Profile Detail Page')
+@section('title', 'User Detail Page')
 @section('content')
     <!-- MAIN CONTENT-->
     <div class="main-content">
@@ -9,8 +9,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h3 class="text-center title-2">Account Detail</h3>
+                                <h3 class="text-center title-2"> User Account Detail</h3>
                             </div>
+
                             <hr>
                             <div class="row align-items-center">
                                 <div class="col-3 offset-1 image img-thumbnail shadow-sm">
@@ -35,7 +36,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-4 offset-1 mt-3">
-                                        <a href="{{ route('account#editAdmin', $data->id) }}"><button
+                                        <a href="{{ route('userList#edit', $data->id) }}"><button
                                                 class="float-start btn btn-dark text-white"> Edit
                                                 Profile</button>
                                         </a>

@@ -77,7 +77,7 @@
                         </li>
                         <li>
                             <a href="{{ route('contact#list') }}">
-                                <i class="fa-solid fa-users"></i> Contact List
+                                <i class="fa-solid fa-address-book"></i> Contact List
                             </a>
                         </li>
                     </ul>
