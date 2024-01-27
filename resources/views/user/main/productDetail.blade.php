@@ -105,24 +105,21 @@
                     @foreach ($products as $d)
                         <div class="product-item bg-light">
 
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" style="height: 220px" src="{{ asset('storage/' . $d->image) }}"
-                                    alt="">
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">{{ $d->name }}</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ $d->price }} MMK</h5>
+                            <a id="viewCount" href="{{ route('item#detail', $d->id) }}">
+                                <div class="product-item bg-light mb-4" id="myForm">
+                                    <div class="product-img position-relative overflow-hidden">
+                                        <img class="img-fluid w-100" style="height: 220px"
+                                            src="{{ asset('storage/' . $d->image) }}" alt="">
+                                    </div>
+                                    <div class="text-center py-4">
+                                        <h4>{{ $d->name }}</h4>
+                                        <div class="d-flex align-items-center justify-content-center mt-2">
+                                            <h5>{{ $d->price }} MMK</h5>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
+                            </a>
 
                         </div>
                     @endforeach

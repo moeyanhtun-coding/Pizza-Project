@@ -138,7 +138,7 @@
 
                     $.ajax({
                         type: "get",
-                        url: "http://127.0.0.1:8000/user/ajax/pizza/list",
+                        url: "/user/ajax/pizza/list",
                         data: {
                             'status': 'asc'
                         },
@@ -148,7 +148,7 @@
                             $list = ``;
                             for ($i = 0; $i < response.length; $i++) {
                                 $list += `<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                                    <a href="http://127.0.0.1:8000/user/pizza/detail/${response[$i].id}">
+                                    <a href="http://127.0.0.1:8000/user/pizza/detail/${response[$i] . id}">
                                 <div class="product-item bg-light mb-4" id="myForm">
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" style="height: 220px"
@@ -174,7 +174,7 @@
 
                     $.ajax({
                         type: "get",
-                        url: "http://127.0.0.1:8000/user/ajax/pizza/list",
+                        url: "/user/ajax/pizza/list",
                         data: {
                             'status': 'desc'
                         },
@@ -183,12 +183,11 @@
                             $list = ``;
                             for ($i = 0; $i < response.length; $i++) {
                                 $list += `<div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                                      <a href="http://127.0.0.1:8000/user/pizza/detail/${response[$i].id}">
+                                      <a href="http://127.0.0.1:8000/user/pizza/detail/${response[$i] . id}">
                                 <div class="product-item bg-light mb-4" id="myForm">
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" style="height: 220px"
                                             src="{{ asset('storage/${response[$i].image}') }}" alt="">
-
                                     </div>
                                     <div class="text-center py-4">
                                         <a class="h6 text-decoration-none text-truncate"
@@ -207,19 +206,6 @@
                     });
                 }
             })
-            // view count
-            $('#viewCount').click(() => {
-                console.log('hit');
-            })
-            $.ajax({
-                type: "get",
-                url: "",
-                data: "",
-                dataType: "json",
-                success: function(response) {
-
-                }
-            });
         });
     </script>
 @endsection

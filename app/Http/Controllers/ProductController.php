@@ -15,12 +15,16 @@ class ProductController extends Controller
     public function listPage()
     {
         $productData = Product::select('products.*', 'categories.name as category_name')
-            ->when(request('key'), function ($query) {
-                $query->where('products.name', 'like', '%' . request('key') . '%');
-            })
+
             ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->orderBy('products.created_at', 'desc')
-            ->paginate(3);
+            ->when(request('key'), function ($query) {
+                $query->orWhere('products.name', 'like', '%' . request('key') . '%')
+                    ->orWhere('categories.name', 'like', '%' . request('key') . '%');
+            })
+            ->paginate(4);
+
+        $productData->appends(['key' => request('key')]);
 
         return view("admin.product.list", compact("productData"));
     }

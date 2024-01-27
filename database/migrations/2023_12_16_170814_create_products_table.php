@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->string('image')->nullable();
-            $table->integer('price');
+            $table->integer('price')->default(3000);
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });
