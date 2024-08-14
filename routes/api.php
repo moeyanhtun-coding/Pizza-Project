@@ -36,18 +36,3 @@ Route::get('contact/detail/{id}', [RouteController::class, 'contactDetail']);
 Route::post('category/update', [RouteController::class, 'categoryUpdate']);
 
 
-/**
- * prodcut list
- * localhost: 8000/api/product/list (GET)
- * category list
- * localhost: 8000/api/category/list (GET)
- *
- * create category localhost: 8000/api/create/category (POST)
- * body{
- *    name:
- * }
-
- * }
- * localhost: 8000/api/category/delete/fid} (GET)
- * localhost: 8000/api/category/delete/{id} (GET)
- **/
